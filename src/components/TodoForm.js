@@ -12,10 +12,17 @@ class TodoForm extends React.Component {
             });
         };
 
+    //? Here we set the state so that item becomes whatever is typed into the input field.
+
         handleSubmit = (e) => {
             e.preventDefault();
+            this.setState({
+                item: ""
+            })
             this.props.addTodo(this.state.item)
         }
+
+    //? Here we stop the page from refreshing during the submit. We also set the state of item to be blank so that whatever we input isn't left in the field. Then, we use the addTodo function to add the new item to the todos array.
 
     render() {
         return (
@@ -23,12 +30,11 @@ class TodoForm extends React.Component {
                 <input
                     type="text"
                     name="item"
-                    placeholder="Add todo here"
                     value={this.state.item}
                     onChange={this.handleChanges}
                 />
-                <button type="submit">Add Todo</button>
-                <button>Clear Completed</button>
+                <button>Add Todo</button>
+                <button type="button" onClick={this.props.removeTodo}>Clear Completed</button>
             </form>
         )
     }
